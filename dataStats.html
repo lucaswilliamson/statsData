@@ -83,7 +83,9 @@ report("#A5",answer)
 <script>
     var getPic = function(penguin)
     {
-        return penguin.picture;
+        var obj = {pic:penguin.picture}
+        return obj;
+        
     }
 var answer=getPic;
 report("#A6",answer)    
@@ -94,20 +96,29 @@ report("#A6",answer)
 <h3>Expand your function from the last one, so that the object it returns not only has a picture attribute, but also new attribute called quizMean, which is the mean of that penguins quiz scores</h3>
 <script>
 //be sure to test your function out.
+    
+ 
+    
     var getPicMean = function(penguin)
     {
-        return penguin.picture, getPenguinGrade(penguin);
+        var obj = {PicMean: getPic(penguin);
+                  getPenguinGrade(penguin);}
+        return obj;
+        
         
     }
-var answer="please complete";
+var answer=getPicMean;
 report("#A7",answer)    
 </script>
     </div>
 
 <div id="A8">
 <h3>With one line of code, return a list of objects that contain the picture and meanQuiz grade of all penguins</h3>
+    
 <script>
-var answer="please complete";
+    var val6 = classroom.map.(getPicMean);
+    
+var answer= val6;
 report("#A8",answer)    
 </script>
     </div>
@@ -122,6 +133,10 @@ report("#A8",answer)
         <li>finalGrade</li>
     </ul>
 <script>
+    var penguininfo = function(penguin)
+    {
+        return 
+    }
 var answer="please complete";
 report("#A9",answer)    
 </script>
@@ -130,7 +145,9 @@ report("#A9",answer)
 <div id="A10">
 <h3>With one line of code, return a list of objects where each objects contains all of the summary info about each penguin.</h3>
 <script>
-var answer="please complete";
+    var val7 = classroom.map(penguininfo)
+    
+var answer=val7;
 report("#A10",answer)    
 </script>
     </div>
