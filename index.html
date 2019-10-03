@@ -1,0 +1,53 @@
+<html>
+<body>
+<h1>
+A1
+</h1>
+<p>
+The answer to A1 was given during class
+</p>
+<h2>
+A2
+</h2>
+<p>
+to find the mean of the first penguin's quiz grades, we called upon the getGrade function from the first problem, and specified where to perform the function (which penguin). To get a certain grade, the quiz class had to be identifid as well or the function could map the homework or exam grades for the specified penguin. After running the function that gets all of the grades, a d3 function can be used to find the mean of the gotten values because those values were identified with a variable.
+
+<p>
+<pre>
+var val = classroom[0].quizes.map(getGrade);
+var answer= d3.mean(val);
+</pre>
+<h3>
+A3
+</h3>
+<p>
+this problem told us to define a function that could be used to find the grades for a given penguin. OUr input value, therefore, is a certain penguin and the output should be the mean of its quiz gardes. here we created a new function and gave an input of "penguin" and the return value needed to give a mean, so we used a d3 function. the d3 function was specified to find the mean, with a penguin input, of the quizzes. The getGrade function was used to get the actual grades from thespecified place, and the d3 finds the mean after the data for the grades are pulled.
+</p>
+<pre>
+var getPenguinGrade = function(penguin)
+{
+    return d3.mean(penguin.quizes.map(getGrade));
+}
+</pre>
+<h4>
+A4
+</h4>
+<p>
+for this problem the mean for all of the penguins' quizzes was the desired output. We already have a function that gets the mean scores of a certain penguin, so all that needed to be done was to map this function across the whole classroom.
+</p>
+<pre>
+ var val= classroom.map(getPenguinGrade)
+ </pre>
+ <h5>
+ A5
+ <h5>
+ <p>
+ here, all we had to do, since the above problem wanted the mean of the quizzes for each penguin, was to take the variable that we assigned for that output and find the mean of that using a d3.mean function.
+ </p>
+ <pre>
+  val5=d3.mean(val)
+  </pre>
+  </body>
+  </html>
+  
+ 
