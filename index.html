@@ -1,53 +1,96 @@
 <html>
+<head>
+   <title>Lab Explanations</title>
+</head>   
 <body>
-<h1>
-A1
-</h1>
+<h1>Lab Explanations</h1>
+<h2>B1</h2>
 <p>
-The answer to A1 was given during class
-</p>
-<h2>
-A2
-</h2>
-<p>
-to find the mean of the first penguin's quiz grades, we called upon the getGrade function from the first problem, and specified where to perform the function (which penguin). To get a certain grade, the quiz class had to be identifid as well or the function could map the homework or exam grades for the specified penguin. After running the function that gets all of the grades, a d3 function can be used to find the mean of the gotten values because those values were identified with a variable.
+We were able to create a function called getReportCard that returned the final grade and picture for a given penguin in the course. This function relied on previously defined functions to carry out each of the required operations to calculate the weighted average based on the syllabus. Firstly, we created a separate function for each grade category that took a given penguin and returned the value of the mean category grade multiplied by the category weight. Each of these functions in turn relied on a function defined in part A that returned a penguin's category average given a penguin. For the sake of an example, here is the function that returned the weighted test category grade for a penguin, identified as calcTests: 
+    <pre>var calcTests= function(penguin){
+    var testsReport= getPenguinTestGrade(penguin);
+    return testsReport*.3;
+};</pre>
+    In the calcTests function, a variable called testsReport is defined as the value returned by the previously defined getPenguinTestGrade given the inputted penguin; getPenguinTestGrade calculates the mean test grade of a penguin. The calcTests function then returns the output of the testsReport variable (i.e., the mean test grade of the input penguin) multiplied by the weight of the test grade category, which is .3 as defined by the syllabus. A similar function was created for each of the other grade categories:
+    <pre>
+    var calcFinal= function(penguin){
+    var finalReport= getPenguinFinalGrade(penguin);
+    return finalReport*.35;
+};
+var calcTests= function(penguin){
+    var testsReport= getPenguinTestGrade(penguin);
+    return testsReport*.3;
+};
+    
+var calcQuizes= function(penguin){
+    var quizesReport= getPenguinGrade(penguin);
+    return quizesReport*.2;
+};
 
-<p>
-<pre>
-var val = classroom[0].quizes.map(getGrade);
-var answer= d3.mean(val);
-</pre>
-<h3>
-A3
-</h3>
-<p>
-this problem told us to define a function that could be used to find the grades for a given penguin. OUr input value, therefore, is a certain penguin and the output should be the mean of its quiz gardes. here we created a new function and gave an input of "penguin" and the return value needed to give a mean, so we used a d3 function. the d3 function was specified to find the mean, with a penguin input, of the quizzes. The getGrade function was used to get the actual grades from thespecified place, and the d3 finds the mean after the data for the grades are pulled.
-</p>
-<pre>
-var getPenguinGrade = function(penguin)
-{
-    return d3.mean(penguin.quizes.map(getGrade));
+var calcHomework= function(penguin){
+    var homeworkReport= getPenguinHWGrade(penguin);
+    return homeworkReport*.15;
+};
+    
+    </pre>
+    In the above code, calcFinal returns the weighted final exam grade given a penguin, calcQuizes returns the weighted quiz average given a penguin, and calcHomework returns the weighted homework average given a penguin. Next, we created a function called calculateReport that returns the final average of a given penguin by taking the sum of the weighted grade categories:
+    <pre>var calculateReport = function(penguin){
+    return calcFinal(penguin)+calcTests(penguin)+calcQuizes(penguin)+calcHomework(penguin);
+};</pre>
+    Finally, the getReportCard function was defined. This function returns an object containing a penguin's picture and final grade given the penguin:
+    <pre>var getReportCard= function(penguin) {
+    var obj= {
+    Pic: getPic(penguin),
+    Report: calculateReport(penguin)
+    
+    }
+    return obj;
+}</pre>
+    The getReportCard function was then mapped to the entire classroom, which returns an array of objects. Each object in the array contains a particular penguin's picture and final grade:
+    <pre>var answer= classroom.map(getReportCard);</pre>
+    
+    Now, here is the entire code altogether:
+    <pre>var calcFinal= function(penguin){
+    var finalReport= getPenguinFinalGrade(penguin);
+    return finalReport*.35;
+};
+var calcTests= function(penguin){
+    var testsReport= getPenguinTestGrade(penguin);
+    return testsReport*.3;
+};
+    
+var calcQuizes= function(penguin){
+    var quizesReport= getPenguinGrade(penguin);
+    return quizesReport*.2;
+};
+
+var calcHomework= function(penguin){
+    var homeworkReport= getPenguinHWGrade(penguin);
+    return homeworkReport*.15;
+};
+
+var calculateReport = function(penguin){
+    return calcFinal(penguin)+calcTests(penguin)+calcQuizes(penguin)+calcHomework(penguin);
+};
+    
+    
+var getReportCard= function(penguin) {
+    var obj= {
+    Pic: getPic(penguin),
+    Report: calculateReport(penguin)
+    
+    }
+    return obj;
 }
-</pre>
-<h4>
-A4
-</h4>
-<p>
-for this problem the mean for all of the penguins' quizzes was the desired output. We already have a function that gets the mean scores of a certain penguin, so all that needed to be done was to map this function across the whole classroom.
-</p>
-<pre>
- var val= classroom.map(getPenguinGrade)
- </pre>
- <h5>
- A5
- </h5>
- <p>
- here, all we had to do, since the above problem wanted the mean of the quizzes for each penguin, was to take the variable that we assigned for that output and find the mean of that using a d3.mean function.
- </p>
- <pre>
-  val5=d3.mean(val)
-  </pre>
-  </body>
-  </html>
-  
- 
+var answer= classroom.map(getReportCard);
+    </pre>  </p>
+<h2>C1</h2>
+<p>  
+In order to answer this question, we needed to create a function that returned the first quiz grade of a penguin given the penguin. We called this function getFirstQuiz:
+<pre>var getFirstQuiz = function(penguin) {
+    return penguin.quizes[0].grade;
+};</pre>
+This function takes a penguin as the input and then returns the value for the grade of the zeroeth object in the quiz array of the penguin. We then wrote a line that maps the getFirstQuiz function to the entire classroom and takes the mean of that value, which returns the average of all the first quiz grades in the classroom: <pre>var firstQuizMean = d3.mean(classroom.map(getFirstQuiz));</pre> 
+</p>      
+</body>
+</html>
