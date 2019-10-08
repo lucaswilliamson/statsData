@@ -266,7 +266,17 @@ report("#C1",answer)
 <p>Hint you may define helper functions inside of a function.</p>
 <script>
     
-var answer="Complete for Extra";
+    var getDailyQuiz = function(day) { 
+        var dayHelp = function (day){
+           return day-1;
+       };
+        var dayIndex=dayHelp(day);
+        var penguinHelp= function (penguin){
+            return penguin.quizes[dayIndex].grade;
+        };
+       return d3.mean(classroom.map(penguinHelp)); 
+    };
+var answer=getDailyQuiz;
     
 report("#D1",answer)    
 </script>
@@ -276,6 +286,10 @@ report("#D1",answer)
 <h3>Write a function that returns an array of the class averages the students earn each day on thier quiz.</h3>
 <p>If you solved D1, you really just need a way to get an array of numbers to map.  You could do this by hand, but if you look up d3.range, you might find a better way to do it.</p>
 <script>
+    var getAllDailyQuiz = function(day){
+        var allDays = d3.range(1,40);
+    return allDays.map(getDailyQuiz);
+    };
 var answer="Complete for Extra";
     
 report("#D2",answer);    
